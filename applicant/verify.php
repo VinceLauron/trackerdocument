@@ -10,11 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Database connection
-    $conn = new mysqli("localhost", "root", "", "fms_db");
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
+    include 'db_connect.php';
     // Check the verification code
     $stmt = $conn->prepare("SELECT verification_code FROM applicant WHERE email = ? AND is_verified = 0");
     $stmt->bind_param("s", $email);

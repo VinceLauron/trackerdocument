@@ -9,19 +9,7 @@ if (!isset($_SESSION['login_id'])) {
     exit();
 }
 
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fms_db";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db_connect.php';
 
 // Fetch requests from database, ordered by created_at or id in descending order
 $sql = "SELECT * FROM request WHERE status = 'pending' OR status = 'onprocess' ORDER BY date_created DESC"; // or ORDER BY id DESC

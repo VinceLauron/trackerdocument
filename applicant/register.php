@@ -22,11 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $verification_code = rand(100000, 999999);
 
     // Database connection
-    $conn = new mysqli("localhost", "root", "", "fms_db");
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
+    include 'db_connect.php';
     // Insert user data into the database
     $stmt = $conn->prepare("INSERT INTO applicant (fullname, dob, email, contact, sex, program_graduated, id_number, year_graduated, admission, verification_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssssssss", $fullname, $dob, $email, $contact, $sex, $program_graduated, $id_number, $year_graduated, $admission, $verification_code);
